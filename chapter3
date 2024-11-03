@@ -1,0 +1,138 @@
+//증감연산자
+
+package sec02.exam01;
+
+public class SignOperatorExample {
+	public static void main(String[] args) {
+		int x = -100;
+		int result1 = +x;
+		int result2 = -x;
+		System.out.println("result1=" + result1);
+		System.out.println("result2=" + result2);
+		
+		byte b = 100;
+		//byte result3 = -b;  //컴파일 에러 
+		int result3 = -b; 
+		System.out.println("result3=" + result3);
+
+	}
+}
+
+//논리 연산자
+package sec02.exam03;
+
+public class DenyLogicOperatorExample {
+	public static void main(String[] args) {
+		boolean play = true;
+		System.out.println(play);
+
+		play = !play;
+		System.out.println(play);
+
+		play = !play;
+		System.out.println(play);
+	}
+}
+
+//산술 연산자
+package sec02.exam04;
+
+public class ArithmeticOperatorExample {
+	public static void main(String[] args) {
+		int v1 = 5;
+		int v2 = 2;
+		
+		int result1 = v1 + v2;
+		System.out.println("result1=" + result1);
+		
+		int result2 = v1 - v2;
+		System.out.println("result2=" + result2);
+		
+		int result3 = v1 * v2;
+		System.out.println("result3=" + result3);
+		
+		int result4 = v1 / v2;
+		System.out.println("result4=" + result4);
+		
+		int result5 = v1 % v2;
+		System.out.println("result5=" + result5);
+		
+		double result6 = (double) v1 / v2;
+		System.out.println("result6=" + result6);	
+	}
+}
+
+
+//문자열 연산과 산술연산
+package sec02.exam06;
+
+public class StringConcatExample {
+	public static void main(String[] args) {
+		String str1 = "JDK" + 6.0;
+		String str2 = str1 + " 특징";
+		System.out.println(str2);
+		
+		String str3 = "JDK" + 3 + 3.0;
+		String str4 = 3 + 3.0 + "JDK";
+		System.out.println(str3);
+		System.out.println(str4);		
+	}
+}
+
+//double과 float의 차이 알아보기
+ackage sec02.exam08;
+
+public class CompareOperatorExample2 {
+	public static void main(String[] args) {
+		int v2 = 1;
+		double v3 = 1.0;
+		System.out.println(v2 == v3); //true
+		
+		double v4 = 0.1;
+		float v5 = 0.1f;
+		System.out.println(v4 == v5); //false
+		System.out.println((float)v4 == v5); //true
+		System.out.println((int)(v4*10) == (int)(v5*10)); //true
+	}
+}
+
+package sec02.exam09;
+
+public class LogicalOperatorExample {
+	public static void main(String[] args) {
+		int charCode = 'A';		
+		
+		if( (charCode>=65) & (charCode<=90) ) {
+			System.out.println("대문자 이군요");
+		}
+		
+		if( (charCode>=97) && (charCode<=122) ) {
+			System.out.println("소문자 이군요");
+		}
+		
+		if( !(charCode<48) && !(charCode>57) ) {
+			System.out.println("0~9 숫자 이군요");
+		}
+		
+		int value = 6;
+		
+		if( (value%2==0) | (value%3==0) ) {
+			System.out.println("2 또는 3의 배수 이군요");
+		}
+		
+		if( (value%2==0) || (value%3==0) ) {
+			System.out.println("2 또는 3의 배수 이군요");
+		}		
+	}
+}
+
+//if를 대신해서 쓸수 있는 방법
+package sec02.exam11;
+
+public class ConditionalOperationExample {
+	public static void main(String[] args) {
+		int score = 85;
+		char grade = (score > 90) ? 'A' : ((score > 80) ? 'B' : 'C');
+		System.out.println(score + "점은 " + grade + "등급입니다.");
+	}
+}
