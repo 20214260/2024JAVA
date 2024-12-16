@@ -1,0 +1,281 @@
+Member.java
+
+package sec01.exam01;
+
+public class Member {
+	public String id;
+
+
+	public Member(String id) {
+	this.id=id;
+}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Member) { // 매개값이 Member타입인지 확인 
+			Member member=(Member) obj; // Member타입으로 강제타입 변환
+			if(id.equals(member.id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
+package sec01.exam01;
+
+public class MemberExample {
+	public static void main(String[] args) {
+		Member obj1=new Member("blue");
+		Member obj2=new Member("blue");
+		Member obj3=new Member("red");
+		
+		if(obj1.equals(obj2)) // 매개값이 Member타입이고 id필드값도 동일
+		{
+			System.out.println("obj1과 obj2는 동등합니다.");
+		} else {
+			System.out.println("obj1과 obj2는 동등하지 않습니다.");
+		}
+		
+		if(obj1.equals(obj3)) // 매개값이 Member타입이지만 id필드값은 다름
+		{
+			System.out.println("obj1과 obj3는 동등합니다.");
+		} else {
+			System.out.println("obj1과 obj3는 동등하지 않습니다.");
+		}
+		
+	}
+
+}
+
+
+package sec01.exam02;
+
+public class Key {
+	public int number;
+	
+	public Key(int number) {
+		this.number=number;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Key) {
+			Key compareKey=(Key) obj;
+			if(this.number==compareKey.number) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	//@Override
+	//public int hashCode() {
+		//return number; // hashCode return값 number필드값 
+	//}
+}
+
+
+package sec01.exam02;
+
+import java.util.HashMap;
+
+public class KeyExample {
+
+	public static void main(String[] args) {
+		// Key 객체를 식별키로 사용해서 String 값을 저장하는 HashMap 객체 생성
+		HashMap<Key,String> hashMap=new HashMap<Key, String>();
+		
+		// 식별키 new Key(1)로 "홍길동" 저장
+		hashMap.put(new Key(1), "홍길동");
+		
+		// 식별키 new Key(1)로 "홍길동" 읽어옴
+		String value=hashMap.get(new Key(1)); 
+		System.out.println(value); // null 출력 
+	}
+}
+
+
+package sec01.exam02;
+
+public class Key {
+	public int number;
+	
+	public Key(int number) {
+		this.number=number;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Key) {
+			Key compareKey=(Key) obj;
+			if(this.number==compareKey.number) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	//@Override
+	//public int hashCode() {
+		//return number; // hashCode return값 number필드값 
+	//}
+}
+
+
+package sec01.exam02;
+
+import java.util.HashMap;
+
+public class KeyExample {
+
+	public static void main(String[] args) {
+		// Key 객체를 식별키로 사용해서 String 값을 저장하는 HashMap 객체 생성
+		HashMap<Key,String> hashMap=new HashMap<Key, String>();
+		
+		// 식별키 new Key(1)로 "홍길동" 저장
+		hashMap.put(new Key(1), "홍길동");
+		
+		// 식별키 new Key(1)로 "홍길동" 읽어옴
+		String value=hashMap.get(new Key(1)); 
+		System.out.println(value); // null 출력 
+	}
+}
+
+
+
+package sec01.exam03;
+
+public class SmartPhone {
+	private String company;
+	private String os;
+	
+	public SmartPhone(String company, String os) {
+		this.company=company;
+		this.os=os;
+	}
+	
+	@Override // toString()재정의
+	public String toString() {
+		return company+","+os;
+	}
+
+}
+
+
+package sec01.exam03;
+
+public class SmartPhoneExample {
+
+	public static void main(String[] args) {
+		SmartPhone myPhone=new SmartPhone("구글","안드로이드");
+		
+		String strObj=myPhone.toString(); // 재정의된 toString()호출 
+		System.out.println(strObj);
+		
+		System.out.println(myPhone); // 재정의된 toString()을 호출하고 리턴값을 받아 출력
+	}
+
+}
+
+
+package sec01.exam03;
+
+import java.util.Date;
+
+public class ToStringExample {
+	public static void main(String[] args) {
+		Object obj1=new Object();
+		Date obj2=new Date();
+		System.out.println(obj1.toString());
+		System.out.println(obj2.toString());
+
+	}
+
+}
+
+
+package sec01.exam04;
+
+public class ExitExample {
+
+	public static void main(String[] args) {
+		for(int i=0; i<10; i++) {
+			if(i==5) {
+				System.exit(0);
+				//break
+			}
+		}
+		System.out.println("마무리 코드");
+	}
+
+}
+
+
+package sec01.exam04;
+
+public class SystemTimeExample {
+
+	public static void main(String[] args) {
+		long time1=System.nanoTime(); // 시작시간 읽기 
+		
+		int sum=0; 
+		for(int i=0; i<=1000000; i++) {
+			sum+=i;
+		}
+		long time2=System.nanoTime(); // 끝 시간읽기
+		System.out.println("1~1000000까지의 합: "+sum);
+		System.out.println("계산에 "+(time2-time1) +"나노초가 소요되었습니다."); // 항상 달라짐
+
+	}
+
+}
+
+
+package sec01.exam05;
+
+public class Car {
+
+}
+
+
+package sec01.exam05;
+
+public class ClassExample {
+
+	public static void main(String[] args) throws Exception{
+		// 첫번째 방법
+		Class clazz=Car.class;
+		
+		// 두번째 방법
+		//Class clazz=Class.forName("sec01.exam05.Car");
+		
+		// 세번째 방법
+		//Car car=new Car(); // 객체 미리 생성
+		//Class clazz=car.getClass();
+		
+		System.out.println(clazz.getName());
+		System.out.println(clazz.getSimpleName());
+		System.out.println(clazz.getPackage().getName());
+
+	}
+
+}
+
+
+package sec01.exam05;
+
+public class ResourcePathExample {
+
+	public static void main(String[] args) {
+		Class clazz=Car.class;
+		
+		String photo1Path=clazz.getResource("photo1.jpg").getPath();
+		String photo2Path=clazz.getResource("images/photo2.jpg").getPath();
+		
+		System.out.println(photo1Path);
+		System.out.println(photo2Path);
+
+	}
+
+}
