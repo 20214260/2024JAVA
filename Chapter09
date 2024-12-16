@@ -1,0 +1,222 @@
+A.java
+
+package sec01.exam01;
+
+// 바깥 클래스
+	class A {
+	A() {System.out.println("A객체가 생성됨");}
+	
+	// 인스턴스 멤버 클래스
+	class B{
+		B() {System.out.println("B객체가 생성됨");}
+		int field;
+		// static int field; // 불가능
+		
+
+void method1() {}
+		// static method2() {} // 불가능
+		
+	}
+	
+	// 정적 멤버 클래스
+	static class C{
+		C() {System.out.println("C객체가 생성됨");}
+		int field;
+		static int field2;
+		void method1() {}
+		static void method2() {}
+	}
+	
+	void method() {
+		// 로컬 클래스
+		class D{
+			D() {System.out.println("D객체가 생성됨");}
+			int field;
+			// static int field2; // D클래스는 메소드 내부에서만 사용되므로 필요 x
+			void method1() {}
+			// static void method2(){} // D클래스는 메소드 내부에서만 사용되므로 필요 x
+		}
+		D d=new D();
+		d.field=3;
+		d.method1();
+	}
+}
+
+package sec01.exam01;
+
+public class Main {
+
+	public static void main(String[] args) {
+		A a=new A(); // A 객체 생성
+		
+		// 인스턴스 멤버 클래스 객체 생성
+		A.B b=a.new B();
+		b.field=3;
+		b.method1();
+		
+		// 정적 멤버 클래스 객체 생성 
+		A.C c=new A.C();
+		c.field=3;
+		c.method1();
+		A.C.field2=3;
+		A.C.method2();
+		
+		// 로컬 클래스 객체 생성을 위한 메소드 호출
+		a.method();
+		
+	}
+
+}
+
+
+package sec01.exam02;
+
+public class A {
+	// 인스턴스 필드
+	B field1=new B();
+	C field2=new C();
+	
+	// 인스턴스 메소드
+	void method1() {
+		B var1=new B();
+		C var2=new C();
+	}
+	
+	// 정적 필드 초기화
+	// static B field -3=new B();
+	static C field4=new C();
+	
+	// 정적 메소드
+	static void method2() {
+		// B var1=new B;
+		C var2=new C();
+	}
+	
+	// 인스턴스 멤버 클래스
+	class B{}
+	
+	// 정적 멤버 클래스
+	static class C{}
+
+}
+
+
+package sec01.exam03;
+
+public class A {
+	int field1;
+	void method1() {}
+	
+	static int field2;
+	static void method2() {}
+	
+	class B{
+		void method() {
+			field1=10;
+			method();
+			
+			field2=10;
+			method2();
+		}
+	}
+	
+	static class C{
+		void method() {
+			// field1=10; // 정적 멤버클래스 안에서는 바깥 클래스의 인스턴스 필드, 메소드 접근 x
+			// method(); 
+			
+			field2=10;
+			method2(); 
+		}
+	}
+
+}
+
+
+
+package sec01.exam04;
+
+public class Outter {
+	// java7 이전
+	public void method1(final int arg) {
+		final int localVariable=1;
+		// arg=100;
+		// localVariable=100;
+		class Inner{
+			public void method() {
+				int result=arg+localVariable;
+			}
+		}
+	}
+	
+	// java8 이후
+	public void method2(int arg) {
+		int localVariable=1;
+		// arg=100;
+		// localVariable=100;
+		class Inner{
+			public void method() {
+				int result=arg+localVariable;
+			}
+		}
+	}
+
+}
+
+
+package sec01.exam05;
+
+public class Outter {
+	String field="Outter-field";
+	void method() {
+		System.out.println("Outter-method");
+	}
+	
+	class Nested{
+		String field="Nested-field";
+		void method() {
+			System.out.println("Nested-field");
+		}
+		void print() {
+			System.out.println(this.field); // 중첩클래스인 Nested클래스 참조
+			this.method();
+			
+			System.out.println(Outter.this.field); // 바깥클래스인 Outter클래스 참조
+			Outter.this.method();
+		}
+	}
+
+}
+
+
+package sec01.exam05;
+
+public class OutterExample {
+
+	public static void main(String[] args) {
+		Outter outter=new Outter();
+		Outter.Nested nested=outter.new Nested();
+		nested.print();
+	}
+
+}
+
+
+package sec01.exam06;
+
+import ex01.OnClickListener;
+
+public class Button {
+	OnClickListener Listener; // 인터페이스 타입 필드
+	
+	void setOnClickListener(OnClickListener Listener) {
+		this.Listener=Listener; // 매개변수의 다형성
+	}
+	void touch() {
+		Listener.onClick(); // 구현 객체의 onClick()메소드 호출
+	}
+	static interface OnClickListener{
+		void onClick(); // 중첩 인터페이스
+	}
+
+}
